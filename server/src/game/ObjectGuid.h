@@ -319,4 +319,19 @@ struct hash<ObjectGuid>
 };
 }
 
+namespace std
+{
+namespace tr1
+{
+template <>
+struct hash<ObjectGuid>
+{
+    std::size_t operator()(const ObjectGuid& guid) const
+    {
+        return hash<uint64>()(guid.GetRawValue());
+    }
+};
+}
+}
+
 #endif
